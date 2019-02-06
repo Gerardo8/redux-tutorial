@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { todoApp } from './todo/Todo'
+import { todoApp } from './todo/TodoApp'
 import { createStore } from 'redux';
 
 console.log('todoApp', todoApp);

@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { store } from "..";
-
 export const FilterLink = ({
     filter,
     currentFilter,
-    children
+    children,
+    onClick
 }) => {
     if (filter === currentFilter) {
         return (
@@ -18,10 +17,7 @@ export const FilterLink = ({
         <button className='btn btn-dark'
             onClick={e => {
                 e.preventDefault();
-                store.dispatch({
-                    type: 'SET_VISIBILITY_FILTER',
-                    filter
-                });
+                onClick(filter)
             }}
         >
             {children}
