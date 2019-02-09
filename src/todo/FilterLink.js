@@ -1,26 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Link } from './Link';
+import { store } from '../index';
 
-export const FilterLink = ({
-    filter,
-    currentFilter,
-    children,
-    onClick
-}) => {
-    if (filter === currentFilter) {
-        return (
-            <span>
-                {children}
-            </span>
-        );
-    }
+export class FilterLink extends Component {
+
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() => {
+      this.forceUpdate();
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  render() {
+    const props = this.props;
+    const state = store.getState();
     return (
-        <button className='btn btn-dark'
-            onClick={e => {
-                e.preventDefault();
-                onClick(filter)
-            }}
-        >
-            {children}
-        </button>
+      <Link
+        active={props.filter === state.visibilityFilter}
+        onClick={() =>
+          store.dispatch({
+            type: 'SET_VISIBILITY_FILTER',
+            filter: props.filter
+          })
+        }
+      >
+        {props.children}
+      </Link>
     );
+  }
 }

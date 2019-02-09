@@ -1,18 +1,23 @@
 import React from 'react';
+import { store } from '../index';
 
-export const AddTodo = ({
-    onAddClick
-}) => {
-    let input;
-    return (
-        <div>
-            <input className='form-control' ref={node => input = node} />
-            <button className='btn btn-primary' onClick={() => {
-                onAddClick(input.value);
-                input.value = '';
-            }}>
-                Add todo
+let nextTodoId = 0;
+
+export const AddTodo = () => {
+  let input;
+  return (
+    <div>
+      <input className='form-control' ref={node => input = node} />
+      <button className='btn btn-primary' onClick={() => {
+        store.dispatch({
+          type: 'ADD_TODO',
+          text: input.value,
+          id: nextTodoId++
+        })
+        input.value = '';
+      }}>
+        Add todo
                 </button>
-        </div>
-    )
+    </div>
+  )
 }

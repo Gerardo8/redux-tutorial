@@ -1,19 +1,18 @@
 import React from 'react';
 
 export const Todo = ({
-    onClick,
-    completed,
-    text
-}) => completed ? (
+  onClick,
+  completed,
+  text
+}) => completed ?
     <li className='list-group-item active'
-        onClick={onClick}
+      onClick={onClick}
     >
-        {text}
+      {text}
     </li>
-) : (
+    :
     <li className='list-group-item'
-        onClick={onClick}
+      onClick={onClick}
     >
-        {text}
+      {text}
     </li>
-);
